@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Exp-6_Adv.css">
+        <title>Yash Kumar Tyagi</title>
+    </head>
+    <body>
+        <div class="side" id="side">
+            <button type="button" id="prime_button" onclick="prime_trans()">Prime Number Checker</button>
+            <button type="button" id="table_button" onclick="table_trans()">Multiplication Table</button>
+            <button type="button" id="fact_button" onclick="fact_trans()">Factorial Calculator</button>
+            <button type="button" id="age_button" onclick="age_trans()">Age Calculator</button>
+        </div>
+        <div class="main" id="main">
+            <div class="prime" id="prime">
+                <div class="inside">
+                    <div class="s1"><p>Prime<br>Number<br>Checker</p></div>                    
+                    <div class="s2">
+                        <input type="text" id="prime_input" name="prime" placeholder="Enter Number">
+                        <button onclick="prime()">Check</button>
+                        <p id="prime_result">No input yet</p>
+                    </div>
+                </div>
+            </div>
+            <div class="table" id="table">
+                <div class="inside">
+                    <div class="s1"><p class="q">Mathematical<br>Table</p></div>
+                    <div class="s2">
+                        <input type="text" id="table_input" name="table" placeholder="Enter Number">
+                        <button onclick="m_table()">Check</button>
+                        <p id="table_result">No input yet</p>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="fact" id="fact">
+                <div class="inside">
+                    <div class="s1"><p class="q">Factorial<br>Calculator</p></div>
+                    <div class="s2">
+                        <input type="text" id="fact_input" name="fact" placeholder="Enter Number">
+                        <button onclick="fact()">Check</button>
+                        <p id="fact_result">No input yet</p>
+                    </div>
+                </div>
+            </div>
+            <div class="age" id="age">
+                <div class="inside">
+                    <div class="s1"><p class="q">Age<br>Calculator</p></div>
+                    <div class="s2">
+                        <input type="date" id="age_input" name="age" placeholder="Enter Date of Birth(MM DD YYYY)">
+                        <button onclick="age()">Check</button>
+                        <p id="age_result">No input yet</p>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const translate = "--translate"
+            function prime_trans(){
+                document.documentElement.style.setProperty(translate,"0%")
+            }
+            function table_trans(){
+                document.documentElement.style.setProperty(translate,"-100%")
+            }
+            function fact_trans(){
+                document.documentElement.style.setProperty(translate,"-200%")
+            }
+            function age_trans(){
+                document.documentElement.style.setProperty(translate,"-300%")
+            }
+
+            function prime()
+            {
+                num = document.getElementById("prime_input").value
+                if(num==""){document.getElementById("prime_result").innerHTML = "No Input"}
+                else
+                {
+                    a = "Number is a Prime"
+                    for(i=2;i<num;i++)
+                    {
+                        if (num%i===0)
+                        {
+                            a = "Number is not Prime"
+                        }
+                    }
+                document.getElementById("prime_result").innerHTML = a;
+                }   
+            }
+            function m_table()
+            {
+                num = document.getElementById("table_input").value
+                if(num==""){document.getElementById("table_result").innerHTML = "No Input"}
+                else{
+                    item = ""
+                    for(i=1;i<11;i++)
+                    {   
+                        item = item + String(num) +"*"+ String(i) +"="+ String(num*i) + "<br>" ;
+                        
+                    }
+                    document.getElementById("table_result").innerHTML = item;
+                }
+            }
+            function fact()
+            {
+                num = document.getElementById("fact_input").value
+                if(num==""){document.getElementById("fact_result").innerHTML = "No Input"}
+                else{
+                    fact = 1
+                    for(num;num>0;num--)
+                    {
+                        fact = fact*num
+                    }
+                    document.getElementById("fact_result").innerHTML = fact;
+                }
+            }
+            function age()
+            {   
+                var m_d = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+                d1 = document.getElementById("age_input").value
+                if(d1==""){document.getElementById("age_result").innerHTML = "No Input"}
+                else{
+                    d1 = new Date(d1);
+                    d2 = new Date();
+                    year_sub = 0;
+                    month_sub = 0;
+                    d1_y = d1.getFullYear();
+                    d1_m = d1.getMonth();
+                    d1_d = d1.getDate();
+                    d2_y = d2.getFullYear();
+                    d2_m = d2.getMonth();
+                    d2_d = d2.getDate();
+                    
+                    if ((d2_d-d1_d)>=0){
+                        date = d2_d-d1_d;
+                    }
+                    else{
+                        month_sub = 1;
+                        d1_m_s = String(d1_m);
+                        date = d2_d - d1_d + m_d[d1_m];
+                    }
+                    
+                    if ((d2_m-d1_m-month_sub)>=0)
+                    {
+                        month = d2_m - d1_m - month_sub;
+                    }
+                    else{
+                        year_sub = 1
+                        month = d2_m-d1_m +12 - month_sub;
+                    }
+
+                    year = d2_y - d1_y - year_sub;
+                    age = String(year)+" Years "+String(month)+ " Months "+String(date)+" Days";
+                    document.getElementById("age_result").innerHTML = age;
+                }
+            }
+        </script>
+    </body>
+    
+</html>
